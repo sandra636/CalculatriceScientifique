@@ -2,8 +2,9 @@
 <%@ page import="co.kozao.calculatricescientifique.model.ResultatCalcul" %>
 
 <%
-    ResultatCalcul resultat = (ResultatCalcul) request.getAttribute("resultat");
+    ResultatCalcul resultat = (ResultatCalcul) session.getAttribute("resultat");
     if (resultat != null) {
+        session.removeAttribute("resultat");
 %>
         <div class="resultat <%= resultat.isAErreur() ? "erreur" : "succes" %>">
             <% if (resultat.isAErreur()) { %>
