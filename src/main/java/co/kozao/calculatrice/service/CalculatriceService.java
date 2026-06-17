@@ -31,9 +31,20 @@ public class CalculatriceService {
 		if (a < 0) {
 			return new ResultatCalcul ("Erreur, la racine carre n'admet pas de nombre négatif");
 		}
-		return new ResultatCalcul(Math.sqrt(a), "racine carée");
+		return new ResultatCalcul(Math.sqrt(a), "racine carée");	
 		
 	}
+	
+	   public ResultatCalcul factorielle(int n) {
+	        if (n < 0) {
+	            return new ResultatCalcul("Erreur : Factorielle d'un nombre négatif");
+	        }
+	        long resultat = 1;
+	        for (int i = 2; i <= n; i++) {
+	            resultat *= i;
+	        }
+	        return new ResultatCalcul((double) resultat, "Factorielle");
+	    }
 	
 	/*public static void main(String[] args) {
 		CalculatriceService cal = new CalculatriceService();
