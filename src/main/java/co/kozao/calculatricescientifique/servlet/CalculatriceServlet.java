@@ -23,33 +23,32 @@ public class CalculatriceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String operation = request.getParameter("operation");
-        String nb1Str = request.getParameter("nb1");
-        String nb2Str = request.getParameter("nb2");
+        
+        
         ResultatCalcul resultat = null;
 
         try {
-            double nb1 = Double.parseDouble(nb1Str);
+            double nb1 = Double.parseDouble(request.getParameter("nb1"));
 
-            switch (operation) {
+            switch (request.getParameter("operation")) {
                 case "addition":
-                    double nb2Add = Double.parseDouble(nb2Str);
+                    double nb2Add = Double.parseDouble(request.getParameter("nb2"));
                     resultat = service.additionner(nb1, nb2Add);
                     break;
                 case "soustraction":
-                    double nb2Sub = Double.parseDouble(nb2Str);
+                    double nb2Sub = Double.parseDouble(request.getParameter("nb2"));
                     resultat = service.soustraire(nb1, nb2Sub);
                     break;
                 case "multiplication":
-                    double nb2Mul = Double.parseDouble(nb2Str);
+                    double nb2Mul = Double.parseDouble(request.getParameter("nb2"));
                     resultat = service.multiplier(nb1, nb2Mul);
                     break;
                 case "division":
-                    double nb2Div = Double.parseDouble(nb2Str);
+                    double nb2Div = Double.parseDouble(request.getParameter("nb2"));
                     resultat = service.diviser(nb1, nb2Div);
                     break;
                 case "puissance":
-                    double nb2Pow = Double.parseDouble(nb2Str);
+                    double nb2Pow = Double.parseDouble(request.getParameter("nb2"));
                     resultat = service.puissance(nb1, nb2Pow);
                     break;
                 case "racine":
@@ -66,13 +65,10 @@ public class CalculatriceServlet extends HttpServlet {
             resultat = new ResultatCalcul("Erreur : veuillez saisir des nombres valides");
         }
 
-        request.setAttribute("resultat", resultat);
-        request.setAttribute("nb1", nb1Str);
-        request.setAttribute("nb2", nb2Str);
-        request.setAttribute("operation", operation);
-        request.getRequestDispatcher("/resultat.jsp").forward(request, response);
+  // pourque le resultat reste affichier sur la meme page index
+        request.getSession().setAttribute("resultat", resultat);
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
