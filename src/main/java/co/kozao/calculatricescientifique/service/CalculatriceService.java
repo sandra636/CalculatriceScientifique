@@ -12,7 +12,7 @@ public class CalculatriceService {
 	}
 	
 	public ResultatCalcul multiplier(double a, double b) {
-		return new ResultatCalcul(a * b, "addition");
+		return new ResultatCalcul(a * b, "multiplication");
 	}
 	
 	public ResultatCalcul diviser(double a, double b) {
